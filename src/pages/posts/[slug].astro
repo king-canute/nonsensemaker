@@ -1,0 +1,26 @@
+---
+// src/pages/posts/[slug].astro
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+
+export function getStaticPaths() {
+  // Use the modern import.meta.glob here as well
+  const posts = import.meta.glob('../../content/articles/*.md', { eager: true });
+  
+  return Object.entries(posts).map(([path, post]) => {
+    const slug = path.split('/').pop().replace('.md', '');
+    return {
+      params: { slug },
+      props: { post },
+    };
+  });
+}
+
+const { post } = Astro.props;
+const { Content } = post; // The <Content /> component renders the Markdown body
+---
+<ArticleLayout>
+  <h1>{post.frontmatter.title}</h1>
+  <p><em>Published on: {new Date(post.frontmatter.pubDate).toLocaleDateString()}</em></p>
+  <hr />
+  <Content />
+</ArticleLayout>

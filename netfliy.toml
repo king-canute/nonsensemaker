@@ -1,0 +1,9 @@
+# This file specifies the build settings for deploying to Netlify.
+
+[build]
+  # This is the command Netlify will run to build your site.
+  command = "npm run build"
+
+  # This is the directory that Netlify will deploy.
+  # Astro's default build output directory is 'dist'.
+  publish = "dist"

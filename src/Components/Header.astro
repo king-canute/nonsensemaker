@@ -1,0 +1,43 @@
+---
+// src/components/Header.astro
+---
+<header>
+  <nav>
+    <a href="/" class="logo">The Parody Observer</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<style>
+  header {
+    margin: 0;
+    padding: 0 1em;
+    background: #f8f8f8;
+    border-bottom: 1px solid #e7e7e7;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1em 0;
+  }
+  .logo {
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2em;
+  }
+  .nav-links a {
+    margin-left: 1em;
+    text-decoration: none;
+    color: #555;
+  }
+  .nav-links a:hover {
+    color: #000;
+  }
+</style>

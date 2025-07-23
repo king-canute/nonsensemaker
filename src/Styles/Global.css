@@ -1,0 +1,59 @@
+/* src/styles/global.css */
+
+:root {
+  --font-serif: Georgia, 'Times New Roman', Times, serif;
+  --font-sans: Helvetica, Arial, sans-serif;
+  
+  --color-text: #121212;
+  --color-background: #FAFAFA;
+  --color-border: #e7e7e7;
+
+  --content-width: 800px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.6;
+}
+
+main {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 2.8rem;
+}
+
+h2 {
+  font-size: 2.2rem;
+}
+
+p {
+  margin-bottom: 1.2em;
+}
+
+a {
+  color: var(--color-text);
+}
+
+footer {
+    text-align: center;
+    padding: 2em 1em;
+    border-top: 1px solid var(--color-border);
+    margin-top: 2em;
+    color: #888;
+    font-size: 0.9em;
+}
