@@ -3,13 +3,13 @@ import HomepageLayout from '../layouts/HomepageLayout.astro';
 
 // 1. Fetch all articles
 const allPostsData = await import.meta.glob('../content/articles/*.md', { eager: true });
-const allPosts = Object.entries(allPostsData); // Use .entries() to keep the file path for the slug
+const allPosts = Object.entries(allPostsData);
 
-// 2. Find the one featured post
-const featuredPostEntry = allPosts.find(([path, post]) => post.frontmatter.featured === true);
+// 2. Find the one featured post (using a more flexible check)
+const featuredPostEntry = allPosts.find(([path, post]) => post.frontmatter.featured);
 
-// 3. Create a new list of all other posts
-const otherPosts = allPosts.filter(([path, post]) => post.frontmatter.featured !== true);
+// 3. Get all other posts (using a more flexible check)
+const otherPosts = allPosts.filter(([path, post]) => !post.frontmatter.featured);
 ---
 <HomepageLayout>
   {featuredPostEntry && (() => {
@@ -43,6 +43,7 @@ const otherPosts = allPosts.filter(([path, post]) => post.frontmatter.featured !
 </HomepageLayout>
 
 <style>
+  /* (Styles remain the same) */
   .more-stories {
     margin-top: 3rem;
   }
