@@ -82,6 +82,13 @@ const otherPosts = allPosts.filter(([path, post]) => !post.frontmatter.featured)
     margin-top: 0;
     line-height: 1.1;
   }
+  
+  /* --- NEW RULE ADDED HERE --- */
+  /* This constrains the width of the featured story's content for readability */
+  .featured-story article {
+    max-width: 80ch; /* 'ch' is a unit based on character width, great for text */
+  }
+  /* -------------------------- */
 
   .featured-story p {
     font-size: 1.1rem;
