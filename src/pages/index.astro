@@ -1,22 +1,39 @@
 ---
-// src/pages/index.astro
 import HomepageLayout from '../layouts/HomepageLayout.astro';
 
-// Use the modern import.meta.glob to fetch articles
-const posts = import.meta.glob('../content/articles/*.md', { eager: true });
+// 1. Fetch all articles
+const allPostsData = await import.meta.glob('../content/articles/*.md', { eager: true });
+const allPosts = Object.entries(allPostsData); // Use .entries() to keep the file path for the slug
+
+// 2. Find the one featured post
+const featuredPostEntry = allPosts.find(([path, post]) => post.frontmatter.featured === true);
+
+// 3. Create a new list of all other posts
+const otherPosts = allPosts.filter(([path, post]) => post.frontmatter.featured !== true);
 ---
 <HomepageLayout>
-  <section>
-    <h2>Latest Articles</h2>
+  {featuredPostEntry && (() => {
+    const [path, post] = featuredPostEntry;
+    const slug = path.split('/').pop().replace('.md', '');
+    return (
+      <section>
+        <h2>Featured Story</h2>
+        <div class="featured-card">
+          <h3><a href={`/posts/${slug}/`}>{post.frontmatter.title}</a></h3>
+          <p>{post.frontmatter.description}</p>
+        </div>
+      </section>
+    )
+  })()}
+
+  <section class="more-stories">
+    <h2>More Stories</h2>
     <ul class="article-list">
-      {Object.entries(posts).map(([path, post]) => {
-        // Derive the slug from the filename
+      {otherPosts.map(([path, post]) => {
         const slug = path.split('/').pop().replace('.md', '');
         return (
           <li>
-            <h3>
-              <a href={`/posts/${slug}/`}>{post.frontmatter.title}</a>
-            </h3>
+            <h3><a href={`/posts/${slug}/`}>{post.frontmatter.title}</a></h3>
             <p>{post.frontmatter.description}</p>
           </li>
         )
@@ -26,6 +43,32 @@ const posts = import.meta.glob('../content/articles/*.md', { eager: true });
 </HomepageLayout>
 
 <style>
+  .more-stories {
+    margin-top: 3rem;
+  }
+  .featured-card {
+    border: 1px solid var(--color-border);
+    padding: 1.5rem;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  .featured-card h3 {
+    margin-top: 0;
+    font-size: 2rem;
+    font-family: var(--font-serif);
+  }
+   .featured-card h3 a {
+    text-decoration: none;
+    color: var(--color-text);
+  }
+  .featured-card h3 a:hover {
+    text-decoration: underline;
+  }
+  .featured-card p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 0;
+  }
   .article-list {
     list-style: none;
     padding: 0;
