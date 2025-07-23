@@ -16,7 +16,6 @@ const allVideos = await import.meta.glob('../content/videos/*.md', { eager: true
           <iframe
             src={`https://www.youtube.com/embed/${video.frontmatter.youtubeId}`}
             title="YouTube video player"
-            frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
           ></iframe>
