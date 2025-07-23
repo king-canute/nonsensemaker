@@ -86,18 +86,9 @@ const otherPosts = allPosts.filter(([path, post]) => !post.frontmatter.featured)
   /* --- NEW RULE ADDED HERE --- */
   /* This constrains the width of the featured story's content for readability */
   .featured-story article {
-    width: 100vw;  /* 100 % of the viewport width, even outside its own parent */
-    max-width: 1400px; /* remove any previous max-width limit */
-    box-sizing: border-box; /* include padding/border in the 100vw so you don’t get a horizontal scrollbar */
-    margin: 0 auto;    /* center the block when viewport is wider than 1400px */
+    max-width: 80ch; /* 'ch' is a unit based on character width, great for text */
   }
-
-  @media (min-width: 1400px) {
-  .full-width {
-    max-width: 1400px; /* or whatever limit you prefer */
-    margin: 0 auto;    /* center the block when viewport is wider than 1400px */
-  }
-}
+  /* -------------------------- */
 
   .featured-story p {
     font-size: 1.1rem;
