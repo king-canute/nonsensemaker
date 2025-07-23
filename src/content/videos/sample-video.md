@@ -1,8 +1,6 @@
 ---
-title: "An Exclusive Interview With The Man Who Invented 'Walking'"
+title: "New Football Manager Game 2025-2026!!!"
 pubDate: "2025-07-23"
-description: "He puts one foot in front of the other, and you won't BELIEVE what happens next."
-youtubeId: "dQw4w9WgXcQ"
+description: "All new hyperrealistic football sim"
+youtubeId: "p0xR5sqVgs4"
 ---
-
-We sit down with the visionary revolutionizing how people get from the couch to the fridge.
