@@ -1,41 +1,34 @@
 ---
 import { Image } from 'astro:assets';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  // Update glob to find 'index.md' files inside subdirectories
-  const posts = await import.meta.glob('../../content/articles/**/index.md', { eager: true });
-
-  return Object.entries(posts).map(([path, post]) => {
-    // Derive the slug from the parent folder's name
-    const pathParts = path.split('/');
-    const slug = pathParts[pathParts.length - 2];
-
-    return {
-      params: { slug },
-      props: { post },
-    };
-  });
+  const posts = await getCollection('articles');
+  return posts.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
 }
 
-const { post } = Astro.props;
-const { Content } = post;
+const { entry } = Astro.props;
+const { Content } = await entry.render();
 ---
 <ArticleLayout>
   <div class="article-header">
-    {post.frontmatter.heroImage && (
+    {entry.data.heroImage && (
       <div class="hero-image">
         <Image 
-          src={post.frontmatter.heroImage} 
-          alt={post.frontmatter.heroAlt} 
+          src={entry.data.heroImage} 
+          alt={entry.data.heroAlt || ''} 
           width={720} 
           height={405}
           formats={['avif', 'webp']}
         />
       </div>
     )}
-    <h1>{post.frontmatter.title}</h1>
-    <p><em>Published on: {new Date(post.frontmatter.pubDate).toLocaleDateString()}</em></p>
+    <h1>{entry.data.title}</h1>
+    <p><em>Published on: {new Date(entry.data.pubDate).toLocaleDateString()}</em></p>
   </div>
   <hr />
   <Content />

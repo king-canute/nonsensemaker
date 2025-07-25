@@ -12,40 +12,43 @@ const featuredPostEntry = allPosts.find(([path, post]) => post.frontmatter.featu
 // 3. Create a new list of all other posts
 const otherPosts = allPosts.filter(([path, post]) => !post.frontmatter.featured);
 ---
+---
+import HomepageLayout from '../layouts/HomepageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('articles');
+
+const featuredPost = allPosts.find(post => post.data.featured);
+const otherPosts = allPosts.filter(post => !post.data.featured);
+---
+
 <HomepageLayout>
   <div class="home-container">
-    {featuredPostEntry && (() => {
-      const [path, post] = featuredPostEntry;
-      const slug = path.split('/').pop().replace('.md', '');
-      return (
-        <section class="featured-story">
-          <a href={`/posts/${slug}/`} class="card-link">
-            <article>
-              <h2>{post.frontmatter.title}</h2>
-              <p class="meta">
-                Published on {new Date(post.frontmatter.pubDate).toLocaleDateString()}
-              </p>
-              <p>{post.frontmatter.description}</p>
-            </article>
-          </a>
-        </section>
-      )
-    })()}
+    {featuredPost && (
+      <section class="featured-story">
+        <a href={`/posts/${featuredPost.slug}/`} class="card-link">
+          <article>
+            <h2>{featuredPost.data.title}</h2>
+            <p class="meta">
+              Published on {new Date(featuredPost.data.pubDate).toLocaleDateString()}
+            </p>
+            <p>{featuredPost.data.description}</p>
+          </article>
+        </a>
+      </section>
+    )}
 
     <section class="more-stories">
-      {otherPosts.map(([path, post]) => {
-        const slug = path.split('/').pop().replace('.md', '');
-        return (
-          <a href={`/posts/${slug}/`} class="card-link">
-            <article class="story-card">
-              <h3>{post.frontmatter.title}</h3>
-              <p class="meta">
-                Published on {new Date(post.frontmatter.pubDate).toLocaleDateString()}
-              </p>
-            </article>
-          </a>
-        )
-      })}
+      {otherPosts.map((post) => (
+        <a href={`/posts/${post.slug}/`} class="card-link">
+          <article class="story-card">
+            <h3>{post.data.title}</h3>
+            <p class="meta">
+              Published on {new Date(post.data.pubDate).toLocaleDateString()}
+            </p>
+          </article>
+        </a>
+      ))}
     </section>
   </div>
 </HomepageLayout>
