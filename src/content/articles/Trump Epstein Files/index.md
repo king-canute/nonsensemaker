@@ -1,7 +1,7 @@
 ---
 title: "The Real Reason the White House Won't Release the Epstein Files"
-pubDate: 2025-07-21
-description: "Donald Trump's time on Epstein Island was Worse Than We Feared"
+pubDate: "2025-07-21"
+description: "Donald Trump's time on Epstein Island was worse than we feared"
 featured: true
 heroImage: ./trumpyugioh.jpg
 heroAlt: Donald Trump playing Yu-Gi-Oh with a child

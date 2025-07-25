@@ -1,6 +1,7 @@
 ---
 import HomepageLayout from '../layouts/HomepageLayout.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets'; // 1. Import the Image component
 
 const allPosts = await getCollection('articles');
 
@@ -13,6 +14,16 @@ const otherPosts = allPosts.filter(post => !post.data.featured);
       <section class="featured-story">
         <a href={`/posts/${featuredPost.slug}/`} class="card-link">
           <article>
+            {/* 2. Add the Image component here */}
+            {featuredPost.data.heroImage && (
+              <Image 
+                src={featuredPost.data.heroImage} 
+                alt={featuredPost.data.heroAlt || ''} 
+                width={720} 
+                height={405}
+                formats={['avif', 'webp']}
+              />
+            )}
             <h2>{featuredPost.data.title}</h2>
             <p class="meta">
               Published on {new Date(featuredPost.data.pubDate).toLocaleDateString()}
@@ -41,7 +52,7 @@ const otherPosts = allPosts.filter(post => !post.data.featured);
 <style>
   .home-container {
     display: grid;
-    grid-template-columns: 2fr 1fr; /* Main column is twice as wide as the side column */
+    grid-template-columns: 2fr 1fr;
     gap: 2rem;
   }
 
@@ -64,6 +75,14 @@ const otherPosts = allPosts.filter(post => !post.data.featured);
     border: 1px solid var(--color-border);
     border-radius: 4px;
   }
+  
+  /* 3. Add styles for the new image */
+  .featured-story img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+  }
 
   .featured-story h2 {
     font-size: 2.2rem;
@@ -72,7 +91,7 @@ const otherPosts = allPosts.filter(post => !post.data.featured);
   }
   
   .featured-story article {
-    max-width: 80ch; /* Constrains the width of the featured story's content for readability */
+    max-width: 80ch;
   }
 
   .featured-story p {
@@ -104,10 +123,10 @@ const otherPosts = allPosts.filter(post => !post.data.featured);
     color: #888;
   }
 
-  /* Responsive styles for mobile and tablets */
+  /* Responsive styles */
   @media (max-width: 768px) {
     .home-container {
-      grid-template-columns: 1fr; /* Stack into a single column */
+      grid-template-columns: 1fr;
     }
     .featured-story h2 {
       font-size: 1.8rem;
