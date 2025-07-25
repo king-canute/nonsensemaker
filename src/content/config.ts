@@ -5,7 +5,7 @@ const articlesCollection = defineCollection({
   type: 'content',
   schema: ({ image }) => z.object({
     title: z.string(),
-    pubDate: z.date(),
+    pubDate: z.string(),
     description: z.string(),
     featured: z.boolean().optional(),
     heroImage: image().optional(), // Use the 'image' helper
@@ -17,7 +17,7 @@ const videosCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    pubDate: z.date(),
+    pubDate: z.string(),
     description: z.string(),
     youtubeId: z.string(),
   }),
