@@ -1,27 +1,12 @@
 ---
 import HomepageLayout from '../layouts/HomepageLayout.astro';
-
-// This JavaScript logic is unchanged.
-// 1. Fetch all articles
-const allPostsData = await import.meta.glob('../content/articles/*.md', { eager: true });
-const allPosts = Object.entries(allPostsData);
-
-// 2. Find the one featured post
-const featuredPostEntry = allPosts.find(([path, post]) => post.frontmatter.featured);
-
-// 3. Create a new list of all other posts
-const otherPosts = allPosts.filter(([path, post]) => !post.frontmatter.featured);
----
----
-import HomepageLayout from '../layouts/HomepageLayout.astro';
-import { getCollection } from 'astro:content'; // This line is likely missing
+import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('articles');
 
 const featuredPost = allPosts.find(post => post.data.featured);
 const otherPosts = allPosts.filter(post => !post.data.featured);
 ---
-
 <HomepageLayout>
   <div class="home-container">
     {featuredPost && (
@@ -86,12 +71,9 @@ const otherPosts = allPosts.filter(post => !post.data.featured);
     line-height: 1.1;
   }
   
-  /* --- NEW RULE ADDED HERE --- */
-  /* This constrains the width of the featured story's content for readability */
   .featured-story article {
-    max-width: 80ch; /* 'ch' is a unit based on character width, great for text */
+    max-width: 80ch; /* Constrains the width of the featured story's content for readability */
   }
-  /* -------------------------- */
 
   .featured-story p {
     font-size: 1.1rem;
