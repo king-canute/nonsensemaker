@@ -2,7 +2,9 @@
 title: "Algerian Gladiator 'Moneyball' Expert Astounded by Rise of Maximus Decius Meridius"
 pubDate: 2025-07-21
 description: "He just doesn't fit any of the metrics we have!"
-featured: true
+featured: false
+heroImage: ./algerianmoneyball.png
+heroAlt: Algerian moneyball scouts discussing gladiators
 ---
 
 Maximus Decius Meridius. Father to a murdered son. Husband to a murdered wife. One of the best gladiators out there. We spoke to an expert Algerian gladiatorial analyst who said that he couldn't understand where he came from.
