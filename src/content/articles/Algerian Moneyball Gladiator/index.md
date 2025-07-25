@@ -1,6 +1,6 @@
 ---
 title: "Algerian Gladiator 'Moneyball' Expert Astounded by Rise of Maximus Decius Meridius"
-pubDate: "2025-07-21"
+pubDate: "2025-07-25"
 description: "He just doesn't fit any of the metrics we have!"
 featured: false
 heroImage: ./algerianmoneyball.png
