@@ -14,7 +14,7 @@ const otherPosts = allPosts.filter(([path, post]) => !post.frontmatter.featured)
 ---
 ---
 import HomepageLayout from '../layouts/HomepageLayout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection } from 'astro:content'; // This line is likely missing
 
 const allPosts = await getCollection('articles');
 
